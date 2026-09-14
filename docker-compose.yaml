@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    container_name: fullcycle-app
+    restart: always
+    tty: true
+    ports:
+      - "8080:8080"
+    networks:
+      - fullcycle-network
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    command: --innodb-use-native-aio=0
+    restart: always
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    tty: true
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_fullcycle
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    networks:
+      - fullcycle-network
+
+networks:
+  fullcycle-network:
+    driver: bridge
