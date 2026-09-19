@@ -37,6 +37,15 @@ Para construir a imagem a partir do código-fonte:
 docker build -t wagnerfonseca/fullcycle-docker-go .
 ```
 
+Verifique o tamanho final da imagem:
+
+```bash
+docker image inspect wagnerfonseca/fullcycle-docker-go \
+	--format='{{.Size}} bytes'
+```
+
+O resultado deve ser inferior a `2097152 bytes` (2 MB).
+
 Depois, execute o container:
 
 ```bash
